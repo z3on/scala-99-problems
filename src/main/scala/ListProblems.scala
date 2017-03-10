@@ -14,7 +14,7 @@ object ListProblems {
     * P02 (*) Find the last but one element of a list.
     */
   def penultimate[T](list: List[T]): T = list match {
-    case elem :: last :: Nil => elem
+    case elem :: _ :: Nil => elem
     case _ :: tail => penultimate(tail)
     case Nil => throw new NoSuchElementException
   }
@@ -126,13 +126,26 @@ object ListProblems {
 
   /**
     * P13 (**) Run-length encoding of a list (direct solution).
+    * Recursive function
     */
-  def encodeDirect[T](list: List[T]): List[(Int, T)] = {
+  def encodeDirectFunc[T](list: List[T]): List[(Int, T)] = {
     if (list.isEmpty) Nil
     else {
       val encoded = encodeDirect(list.tail)
       if (encoded.headOption.forall(tuple => tuple._2 != list.head)) (1, list.head) :: encoded
       else (encoded.head._1 + 1, encoded.head._2) :: encoded.tail
+    }
+  }
+
+  /**
+    * P13 (**) Run-length encoding of a list (direct solution).
+    * Higher-order functions
+    */
+  def encodeDirect[T](list: List[T]): List[(Int, T)] = {
+    list.foldRight(List.empty[(Int, T)]){
+      case (elem, encoded) =>
+        if (encoded.headOption.exists(_._2 == elem)) (encoded.head._1 + 1, elem) :: encoded.tail
+        else (1, elem) :: encoded
     }
   }
 }

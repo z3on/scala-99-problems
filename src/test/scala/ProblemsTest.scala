@@ -141,4 +141,18 @@ class ProblemsTest extends FunSuite {
     assert(encodeDirect(List('a, 'b, 'c, 'a, 'd, 'e)) == List((1, 'a), (1, 'b), (1, 'c), (1, 'a), (1, 'd), (1, 'e)))
     assert(encodeDirect(List()) == List())
   }
+
+  test("problem 14 - recursive function") {
+    assert(duplicateFunc(List('a, 'b, 'c, 'd, 'e)) == List('a, 'a, 'b, 'b, 'c, 'c, 'd, 'd, 'e, 'e))
+    assert(duplicateFunc(List('a, 'a, 'a, 'a)) == List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a))
+    assert(duplicateFunc(List('a, 'b, 'a)) == List('a, 'a, 'b, 'b, 'a, 'a))
+    assert(duplicateFunc(List()) == List())
+  }
+
+  test("problem 14 - higher-order functions") {
+    assert(duplicate(List('a, 'b, 'c, 'd, 'e)) == List('a, 'a, 'b, 'b, 'c, 'c, 'd, 'd, 'e, 'e))
+    assert(duplicate(List('a, 'a, 'a, 'a)) == List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a))
+    assert(duplicate(List('a, 'b, 'a)) == List('a, 'a, 'b, 'b, 'a, 'a))
+    assert(duplicate(List()) == List())
+  }
 }

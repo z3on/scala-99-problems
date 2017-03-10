@@ -112,7 +112,7 @@ object ListProblems {
     * Higher-order functions
     */
   def pack[T](list: List[T]): List[List[T]] = {
-    list.foldRight(List.empty[List[T]]){
+    list.foldRight(List.empty[List[T]]) {
       case (elem, packed) =>
         if (packed.headOption.exists(_.head == elem)) (elem :: packed.head) :: packed.tail
         else List(elem) :: packed
@@ -127,6 +127,7 @@ object ListProblems {
     def encodeRecursive(grouped: List[List[T]]): List[(Int, T)] =
       if (grouped.isEmpty) Nil
       else (grouped.head.length, grouped.head.head) :: encodeRecursive(grouped.tail)
+
     encodeRecursive(pack(list))
   }
 
@@ -204,4 +205,20 @@ object ListProblems {
         else (1, elem) :: encoded
     }
   }
+
+  /**
+    * P14 (*) Duplicate the elements of a list.
+    * Recursive function
+    */
+  def duplicateFunc[T](list: List[T]): List[T] =
+    if (list.isEmpty) Nil
+    else list.head :: list.head :: duplicate(list.tail)
+
+  /**
+    * P14 (*) Duplicate the elements of a list.
+    * Higher-order functions
+    */
+  def duplicate[T](list: List[T]): List[T] =
+    list.flatMap(el => List(el, el))
+
 }

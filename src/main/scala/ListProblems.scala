@@ -36,6 +36,7 @@ object ListProblems {
       case Nil => curLength
       case _ :: tail => lengthRecursive(tail, curLength + 1)
     }
+
     lengthRecursive(list, 0)
   }
 
@@ -47,6 +48,7 @@ object ListProblems {
       case Nil => reversed
       case head :: tail => reverseRecursive(tail, head :: reversed)
     }
+
     reverseRecursive(list, Nil)
   }
 
@@ -59,6 +61,7 @@ object ListProblems {
       else if (list.length == reversed.length + 1) list.tail == reversed
       else if (list.length < reversed.length) false
       else accumulateReversed(list.tail, list.head :: reversed)
+
     accumulateReversed(list, Nil)
   }
 
@@ -75,6 +78,7 @@ object ListProblems {
         // single element
         case head :: tail => recursiveFlatter(tail, flattenList :+ head)
       }
+
     recursiveFlatter(list, Nil)
   }
 
@@ -86,6 +90,7 @@ object ListProblems {
       if (rest.isEmpty) Nil
       else if (lastElement.contains(rest.head)) recursiveCompress(rest.tail, lastElement)
       else rest.head :: recursiveCompress(rest.tail, Some(rest.head))
+
     recursiveCompress(list, Option.empty)
   }
 
@@ -117,12 +122,22 @@ object ListProblems {
 
   /**
     * P12 (**) Decode a run-length encoded list.
+    * Recursive function
     */
-  def decode[T](list: List[(Int, T)]): List[T] = list match {
+  def decodeFunc[T](list: List[(Int, T)]): List[T] = list match {
     case Nil => Nil
     case (1, el) :: tail => el :: decode(tail)
     case (count, el) :: tail => el :: decode((count - 1, el) :: tail)
   }
+
+  /**
+    * P12 (**) Decode a run-length encoded list.
+    * Higher-order functions
+    */
+  def decode[T](list: List[(Int, T)]): List[T] = list.flatMap {
+    case (count, el) => List.fill(count)(el)
+  }
+
 
   /**
     * P13 (**) Run-length encoding of a list (direct solution).
@@ -142,7 +157,7 @@ object ListProblems {
     * Higher-order functions
     */
   def encodeDirect[T](list: List[T]): List[(Int, T)] = {
-    list.foldRight(List.empty[(Int, T)]){
+    list.foldRight(List.empty[(Int, T)]) {
       case (elem, encoded) =>
         if (encoded.headOption.exists(_._2 == elem)) (encoded.head._1 + 1, elem) :: encoded.tail
         else (1, elem) :: encoded

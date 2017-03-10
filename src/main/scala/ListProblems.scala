@@ -101,4 +101,10 @@ object ListProblems {
     }
   }
 
+  /**
+    * P10 (*) Run-length encoding of a list.
+    */
+  def encode[T](list: List[T]): List[(Int, T)] = {
+    pack(list).map(nestedList => (nestedList.length, nestedList.head))
+  }
 }

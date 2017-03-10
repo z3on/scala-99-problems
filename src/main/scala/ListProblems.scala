@@ -121,6 +121,18 @@ object ListProblems {
 
   /**
     * P10 (*) Run-length encoding of a list.
+    * Recursive function
+    */
+  def encodeFunc[T](list: List[T]): List[(Int, T)] = {
+    def encodeRecursive(grouped: List[List[T]]): List[(Int, T)] =
+      if (grouped.isEmpty) Nil
+      else (grouped.head.length, grouped.head.head) :: encodeRecursive(grouped.tail)
+    encodeRecursive(pack(list))
+  }
+
+  /**
+    * P10 (*) Run-length encoding of a list.
+    * Higher-order functions
     */
   def encode[T](list: List[T]): List[(Int, T)] = {
     pack(list).map(nestedList => (nestedList.length, nestedList.head))

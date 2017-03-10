@@ -101,7 +101,7 @@ object ListProblems {
   def packFunc[T](list: List[T]): List[List[T]] = {
     if (list.isEmpty) Nil
     else {
-      val packed = pack(list.tail)
+      val packed = packFunc(list.tail)
       if (packed.headOption.map(_.head).contains(list.head)) (list.head :: packed.head) :: packed.tail
       else List(list.head) :: packed
     }
@@ -140,9 +140,25 @@ object ListProblems {
 
   /**
     * P11 (*) Modified run-length encoding.
+    * Recursive function
+    */
+  def encodeModifiedFunc[T](list: List[T]): List[Any] = {
+    def encodeModifiedRecursive(stats: List[(Int, T)]): List[Any] =
+      if (stats.isEmpty) Nil
+      else if (stats.head._1 == 1) stats.head._2 :: encodeModifiedRecursive(stats.tail)
+      else stats.head :: encodeModifiedRecursive(stats.tail)
+
+    encodeModifiedRecursive(encode(list))
+  }
+
+  /**
+    * P11 (*) Modified run-length encoding.
+    * Higher-order functions
     */
   def encodeModified[T](list: List[T]): List[Any] = {
-    encode(list).map(tuple => if (tuple._1 == 1) tuple._2 else tuple)
+    encode(list).map {
+      case (count, elem) => if (count == 1) elem else (count, elem)
+    }
   }
 
   /**
@@ -151,8 +167,8 @@ object ListProblems {
     */
   def decodeFunc[T](list: List[(Int, T)]): List[T] = list match {
     case Nil => Nil
-    case (1, el) :: tail => el :: decode(tail)
-    case (count, el) :: tail => el :: decode((count - 1, el) :: tail)
+    case (1, el) :: tail => el :: decodeFunc(tail)
+    case (count, el) :: tail => el :: decodeFunc((count - 1, el) :: tail)
   }
 
   /**
@@ -171,7 +187,7 @@ object ListProblems {
   def encodeDirectFunc[T](list: List[T]): List[(Int, T)] = {
     if (list.isEmpty) Nil
     else {
-      val encoded = encodeDirect(list.tail)
+      val encoded = encodeDirectFunc(list.tail)
       if (encoded.headOption.forall(tuple => tuple._2 != list.head)) (1, list.head) :: encoded
       else (encoded.head._1 + 1, encoded.head._2) :: encoded.tail
     }

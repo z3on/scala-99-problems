@@ -63,4 +63,12 @@ class ProblemsTest extends FunSuite {
     assert(flatten(List(1)) == List(1))
     assert(flatten(List(List(1))) == List(1))
   }
+
+  test("problem 8") {
+    assert(compress(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) == List('a, 'b, 'c, 'a, 'd, 'e))
+    assert(compress(List('a, 'c, 'a, 'c, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) == List('a, 'c, 'a, 'c, 'a, 'b, 'c, 'a, 'd, 'e))
+    assert(compress(List()) == List())
+    assert(compress(List('a, 'a, 'a, 'a, 'a)) == List('a))
+    assert(compress(List('a, 'b, 'c, 'd, 'e)) == List('a, 'b, 'c, 'd, 'e))
+  }
 }

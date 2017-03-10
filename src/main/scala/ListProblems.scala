@@ -78,4 +78,15 @@ object ListProblems {
     recursiveFlatter(list, Nil)
   }
 
+  /**
+    * P08 (**) Eliminate consecutive duplicates of list elements.
+    */
+  def compress[T](list: List[T]): List[T] = {
+    def recursiveCompress(rest: List[T], lastElement: Option[T], compressed: List[T]): List[T] =
+      if (rest.isEmpty) compressed
+      else if (lastElement.contains(rest.head)) recursiveCompress(rest.tail, lastElement, compressed)
+      else recursiveCompress(rest.tail, Option(rest.head), compressed :+ rest.head)
+    recursiveCompress(list, Option.empty, Nil)
+  }
+
 }

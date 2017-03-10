@@ -62,4 +62,20 @@ object ListProblems {
     accumulateReversed(list, Nil)
   }
 
+  /**
+    * P07 (**) Flatten a nested list structure.
+    */
+  def flatten(list: List[Any]): List[Any] = {
+    def recursiveFlatter(rest: List[Any], flattenList: List[Any]): List[Any] =
+      rest match {
+        // empty list
+        case Nil => flattenList
+        // nested list
+        case (nestedHead :: nestedTail) :: tail => recursiveFlatter(tail, flattenList ++ recursiveFlatter(nestedHead :: nestedTail, Nil))
+        // single element
+        case head :: tail => recursiveFlatter(tail, flattenList :+ head)
+      }
+    recursiveFlatter(list, Nil)
+  }
+
 }

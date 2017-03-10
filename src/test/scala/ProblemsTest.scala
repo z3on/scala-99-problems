@@ -53,4 +53,14 @@ class ProblemsTest extends FunSuite {
     assert(isPalindrome(List(1, 2, 3, 2, 1)))
     assert(isPalindrome(List(1, 2, 3, 3, 2, 1)))
   }
+
+  test("problem 7") {
+    assert(flatten(List(List(1, 1), 2, List(3, List(5, 8)))) == List(1, 1, 2, 3, 5, 8))
+    assert(flatten(List(1, 2, List(3, List(5, List(8, 9))))) == List(1, 2, 3, 5, 8, 9))
+    assert(flatten(List(1, 2, 3, 5, 8, 9)) == List(1, 2, 3, 5, 8, 9))
+    assert(flatten(List(List(1, 1), 2, 3)) == List(1, 1, 2, 3))
+    assert(flatten(List()) == List())
+    assert(flatten(List(1)) == List(1))
+    assert(flatten(List(List(1))) == List(1))
+  }
 }

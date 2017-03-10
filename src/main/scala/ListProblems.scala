@@ -107,4 +107,11 @@ object ListProblems {
   def encode[T](list: List[T]): List[(Int, T)] = {
     pack(list).map(nestedList => (nestedList.length, nestedList.head))
   }
+
+  /**
+    * P11 (*) Modified run-length encoding.
+    */
+  def encodeModified[T](list: List[T]): List[Any] = {
+    encode(list).map(tuple => if (tuple._1 == 1) tuple._2 else tuple)
+  }
 }

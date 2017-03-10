@@ -85,4 +85,11 @@ class ProblemsTest extends FunSuite {
     assert(encode(List('a, 'b, 'c, 'a, 'd, 'e)) == List((1, 'a), (1, 'b), (1, 'c), (1, 'a), (1, 'd), (1, 'e)))
     assert(encode(List()) == List())
   }
+
+  test("problem 11") {
+    assert(encodeModified(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) == List((4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e)))
+    assert(encodeModified(List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a)) == List((9, 'a)))
+    assert(encodeModified(List('a, 'b, 'c, 'a, 'd, 'e)) ==List('a, 'b, 'c, 'a, 'd, 'e))
+    assert(encodeModified(List()) == List())
+  }
 }

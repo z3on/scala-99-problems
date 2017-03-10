@@ -114,4 +114,13 @@ object ListProblems {
   def encodeModified[T](list: List[T]): List[Any] = {
     encode(list).map(tuple => if (tuple._1 == 1) tuple._2 else tuple)
   }
+
+  /**
+    * P12 (**) Decode a run-length encoded list.
+    */
+  def decode[T](list: List[(Int, T)]): List[T] = list match {
+    case Nil => Nil
+    case (1, el) :: tail => el :: decode(tail)
+    case (count, el) :: tail => el :: decode((count - 1, el) :: tail)
+  }
 }

@@ -85,8 +85,20 @@ object ListProblems {
     def recursiveCompress(rest: List[T], lastElement: Option[T], compressed: List[T]): List[T] =
       if (rest.isEmpty) compressed
       else if (lastElement.contains(rest.head)) recursiveCompress(rest.tail, lastElement, compressed)
-      else recursiveCompress(rest.tail, Option(rest.head), compressed :+ rest.head)
+      else recursiveCompress(rest.tail, Some(rest.head), compressed :+ rest.head)
     recursiveCompress(list, Option.empty, Nil)
+  }
+
+  /**
+    * P09 (**) Pack consecutive duplicates of list elements into sublists.
+    */
+  def pack[T](list: List[T]): List[List[T]] = {
+    if (list.isEmpty) Nil
+    else {
+      val packed = pack(list.tail)
+      if (packed.headOption.map(_.head).contains(list.head)) (list.head :: packed.head) :: packed.tail
+      else List(list.head) :: packed
+    }
   }
 
 }

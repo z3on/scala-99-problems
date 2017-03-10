@@ -33,4 +33,11 @@ class ProblemsTest extends FunSuite {
     assert(length(List()) == 0)
     assert(length(List(1, 2, 3, 5, 4)) == 5)
   }
+
+  test("problem 5") {
+    assert(reverse(List(1, 2, 3)) == List(3, 2, 1))
+    assert(reverse(List()) == List())
+    assert(reverse(List(1)) == List(1))
+    assert(reverse(List(1, 2)) == List(2, 1))
+  }
 }

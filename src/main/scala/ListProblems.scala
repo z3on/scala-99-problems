@@ -33,7 +33,15 @@ object ListProblems {
     */
   def length[T](list: List[T]): Int = list match {
     case Nil => 0
-    case elem :: tail => 1 + length(tail)
+    case _ :: tail => 1 + length(tail)
+  }
+
+  /**
+    * P05 (*) Reverse a list.
+    */
+  def reverse[T](list: List[T]): List[T] = list match {
+    case Nil => Nil
+    case head :: tail => reverse(tail) ++ List(head)
   }
 
 }

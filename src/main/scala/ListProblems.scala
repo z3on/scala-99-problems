@@ -123,4 +123,16 @@ object ListProblems {
     case (1, el) :: tail => el :: decode(tail)
     case (count, el) :: tail => el :: decode((count - 1, el) :: tail)
   }
+
+  /**
+    * P13 (**) Run-length encoding of a list (direct solution).
+    */
+  def encodeDirect[T](list: List[T]): List[(Int, T)] = {
+    if (list.isEmpty) Nil
+    else {
+      val encoded = encodeDirect(list.tail)
+      if (encoded.headOption.forall(tuple => tuple._2 != list.head)) (1, list.head) :: encoded
+      else (encoded.head._1 + 1, encoded.head._2) :: encoded.tail
+    }
+  }
 }

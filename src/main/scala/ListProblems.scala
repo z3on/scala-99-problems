@@ -96,13 +96,26 @@ object ListProblems {
 
   /**
     * P09 (**) Pack consecutive duplicates of list elements into sublists.
+    * Recursive function
     */
-  def pack[T](list: List[T]): List[List[T]] = {
+  def packFunc[T](list: List[T]): List[List[T]] = {
     if (list.isEmpty) Nil
     else {
       val packed = pack(list.tail)
       if (packed.headOption.map(_.head).contains(list.head)) (list.head :: packed.head) :: packed.tail
       else List(list.head) :: packed
+    }
+  }
+
+  /**
+    * P09 (**) Pack consecutive duplicates of list elements into sublists.
+    * Higher-order functions
+    */
+  def pack[T](list: List[T]): List[List[T]] = {
+    list.foldRight(List.empty[List[T]]){
+      case (elem, packed) =>
+        if (packed.headOption.exists(_.head == elem)) (elem :: packed.head) :: packed.tail
+        else List(elem) :: packed
     }
   }
 

@@ -72,7 +72,14 @@ class ProblemsTest extends FunSuite {
     assert(compress(List('a, 'b, 'c, 'd, 'e)) == List('a, 'b, 'c, 'd, 'e))
   }
 
-  test("problem 9") {
+  test("problem 9 - recursive function") {
+    assert(packFunc(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) == List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e)))
+    assert(packFunc(List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a)) == List(List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a)))
+    assert(packFunc(List('a, 'b, 'c, 'a, 'd, 'e)) == List(List('a), List('b), List('c), List('a), List('d), List('e)))
+    assert(packFunc(List()) == List())
+  }
+
+  test("problem 9 - higher-order functions") {
     assert(pack(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) == List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a), List('d), List('e, 'e, 'e, 'e)))
     assert(pack(List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a)) == List(List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a, 'a)))
     assert(pack(List('a, 'b, 'c, 'a, 'd, 'e)) == List(List('a), List('b), List('c), List('a), List('d), List('e)))

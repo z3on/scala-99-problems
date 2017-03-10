@@ -44,4 +44,16 @@ object ListProblems {
     case head :: tail => reverse(tail) ++ List(head)
   }
 
+  /**
+    * P06 (*) Find out whether a list is a palindrome.
+    */
+  def isPalindrome[T](list: List[T]): Boolean = {
+    def accumulateReversed(list: List[T], reversed: List[T]): Boolean =
+      if (list.length == reversed.length) list == reversed
+      else if (list.length == reversed.length + 1) list.tail == reversed
+      else if (list.length < reversed.length) false
+      else accumulateReversed(list.tail, list.head :: reversed)
+    accumulateReversed(list, Nil)
+  }
+
 }

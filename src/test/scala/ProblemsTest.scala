@@ -39,5 +39,18 @@ class ProblemsTest extends FunSuite {
     assert(reverse(List()) == List())
     assert(reverse(List(1)) == List(1))
     assert(reverse(List(1, 2)) == List(2, 1))
+    assert(reverse(List(1, 1, 2, 3, 5, 8)) == List(8, 5, 3, 2, 1, 1))
+  }
+
+  test("problem 6") {
+    assert(!isPalindrome(List(1, 2, 3)))
+    assert(isPalindrome(List()))
+    assert(isPalindrome(List(1)))
+    assert(!isPalindrome(List(1, 2)))
+    assert(isPalindrome(List(1, 2, 1)))
+    assert(isPalindrome(List(1, 2, 2, 1)))
+    assert(!isPalindrome(List(1, 2, 2, 1, 1)))
+    assert(isPalindrome(List(1, 2, 3, 2, 1)))
+    assert(isPalindrome(List(1, 2, 3, 3, 2, 1)))
   }
 }

@@ -286,6 +286,25 @@ object ListProblems {
     * Higher-order functions
     */
   def split[T](n: Int, list: List[T]): (List[T], List[T]) =
-    list.splitAt(n)
+    // Obvious: list.splitAt(n)
+    (list.take(n), list.drop(n))
+
+  /**
+    * P18 (**) Extract a slice from a list.
+    * Recursive function
+    */
+  def sliceFunc[T](from: Int, to: Int, list: List[T]): List[T] = {
+    if (to == 0 || list.isEmpty) Nil
+    else if (from == 0) list.head :: sliceFunc(from, to - 1, list.tail)
+    else sliceFunc(from - 1, to - 1, list.tail)
+  }
+
+  /**
+    * P18 (**) Extract a slice from a list.
+    * Higher-order functions
+    */
+  def slice[T](from: Int, to: Int, list: List[T]): List[T] =
+    // Obvious: list.slice(from, to)
+    list.drop(from).take(to - from)
 
 }

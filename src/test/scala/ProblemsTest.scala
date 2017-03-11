@@ -207,4 +207,22 @@ class ProblemsTest extends FunSuite {
     assert(split(3, List('a, 'b, 'c)) == (List('a, 'b, 'c), List()))
     assert(split(3, List()) == (List(), List()))
   }
+
+  test("problem 18 - recursive function") {
+    assert(sliceFunc(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('d, 'e, 'f, 'g))
+    assert(sliceFunc(3, 6, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('d, 'e, 'f))
+    assert(sliceFunc(0, 4, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('a, 'b, 'c, 'd))
+    assert(sliceFunc(3, 5, List('a, 'b, 'c, 'd)) == List('d))
+    assert(sliceFunc(5, 6, List('a, 'b, 'c, 'd)) == List())
+    assert(sliceFunc(3, 4, List()) == List())
+  }
+
+  test("problem 18 - higher-order functions") {
+    assert(slice(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('d, 'e, 'f, 'g))
+    assert(slice(3, 6, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('d, 'e, 'f))
+    assert(slice(0, 4, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('a, 'b, 'c, 'd))
+    assert(slice(3, 5, List('a, 'b, 'c, 'd)) == List('d))
+    assert(slice(5, 6, List('a, 'b, 'c, 'd)) == List())
+    assert(slice(3, 4, List()) == List())
+  }
 }

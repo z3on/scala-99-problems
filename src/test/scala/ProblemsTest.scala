@@ -157,6 +157,7 @@ class ProblemsTest extends FunSuite {
   }
 
   test("problem 15 - recursive function") {
+    assert(duplicateNFunc(3, List('a, 'b, 'c, 'c, 'd)) == List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
     assert(duplicateNFunc(3, List('a, 'b, 'c, 'd, 'e)) == List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'd, 'd, 'd, 'e, 'e, 'e))
     assert(duplicateNFunc(2, List('a, 'a, 'a, 'a)) == List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a))
     assert(duplicateNFunc(2, List('a, 'b, 'a)) == List('a, 'a, 'b, 'b, 'a, 'a))
@@ -166,11 +167,30 @@ class ProblemsTest extends FunSuite {
   }
 
   test("problem 15 - higher-order functions") {
+    assert(duplicateN(3, List('a, 'b, 'c, 'c, 'd)) == List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
     assert(duplicateN(3, List('a, 'b, 'c, 'd, 'e)) == List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'd, 'd, 'd, 'e, 'e, 'e))
     assert(duplicateN(2, List('a, 'a, 'a, 'a)) == List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a))
     assert(duplicateN(2, List('a, 'b, 'a)) == List('a, 'a, 'b, 'b, 'a, 'a))
     assert(duplicateN(1, List('a, 'b, 'a)) == List('a, 'b, 'a))
     assert(duplicateN(0, List('a, 'b, 'a)) == List())
     assert(duplicateN(5, List()) == List())
+  }
+
+  test("problem 16 - recursive function") {
+    assert(dropFunc(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k))
+    assert(dropFunc(3, List('a, 'b, 'c, 'd, 'e)) == List('a, 'b, 'd, 'e))
+    assert(dropFunc(2, List('a, 'a, 'a, 'a)) == List('a, 'a))
+    assert(dropFunc(2, List('a, 'b, 'a)) == List('a, 'a))
+    assert(dropFunc(1, List('a, 'b, 'a)) == List())
+    assert(dropFunc(1, List()) == List())
+  }
+
+  test("problem 16 - higher-order functions") {
+    assert(drop(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k))
+    assert(drop(3, List('a, 'b, 'c, 'd, 'e)) == List('a, 'b, 'd, 'e))
+    assert(drop(2, List('a, 'a, 'a, 'a)) == List('a, 'a))
+    assert(drop(2, List('a, 'b, 'a)) == List('a, 'a))
+    assert(drop(1, List('a, 'b, 'a)) == List())
+    assert(drop(1, List()) == List())
   }
 }

@@ -241,4 +241,28 @@ object ListProblems {
   def duplicateN[T](n: Int, list: List[T]): List[T] =
     list.flatMap(List.fill(n)(_))
 
+  /**
+    * P15 (**) Duplicate the elements of a list a given number of times.
+    * Recursive function
+    */
+  def dropFunc[T](n: Int, list: List[T]): List[T] = {
+    def nTimesList(rest: List[T], currentN: Int): List[T] =
+      if (rest.isEmpty) Nil
+      else if (currentN == 1) nTimesList(rest.tail, n)
+      else rest.head :: nTimesList(rest.tail, currentN - 1)
+
+    nTimesList(list, n)
+  }
+
+  /**
+    * P15 (**) Duplicate the elements of a list a given number of times.
+    * Higher-order functions
+    */
+  def drop[T](n: Int, list: List[T]): List[T] =
+    list.zipWithIndex
+      .filter {
+        case (_, index) => ((index + 1) % n) > 0
+      }
+      .map { case (el, _) => el }
+
 }

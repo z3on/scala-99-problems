@@ -221,4 +221,24 @@ object ListProblems {
   def duplicate[T](list: List[T]): List[T] =
     list.flatMap(el => List(el, el))
 
+  /**
+    * P15 (**) Duplicate the elements of a list a given number of times.
+    * Recursive function
+    */
+  def duplicateNFunc[T](n: Int, list: List[T]): List[T] = {
+    def nTimesList(rest: List[T], currentN: Int): List[T] =
+      if (rest.isEmpty) Nil
+      else if (currentN == 0) nTimesList(rest.tail, n)
+      else rest.head :: nTimesList(rest, currentN - 1)
+
+    nTimesList(list, n)
+  }
+
+  /**
+    * P15 (**) Duplicate the elements of a list a given number of times.
+    * Higher-order functions
+    */
+  def duplicateN[T](n: Int, list: List[T]): List[T] =
+    list.flatMap(List.fill(n)(_))
+
 }

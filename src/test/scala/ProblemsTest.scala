@@ -155,4 +155,22 @@ class ProblemsTest extends FunSuite {
     assert(duplicate(List('a, 'b, 'a)) == List('a, 'a, 'b, 'b, 'a, 'a))
     assert(duplicate(List()) == List())
   }
+
+  test("problem 15 - recursive function") {
+    assert(duplicateNFunc(3, List('a, 'b, 'c, 'd, 'e)) == List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'd, 'd, 'd, 'e, 'e, 'e))
+    assert(duplicateNFunc(2, List('a, 'a, 'a, 'a)) == List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a))
+    assert(duplicateNFunc(2, List('a, 'b, 'a)) == List('a, 'a, 'b, 'b, 'a, 'a))
+    assert(duplicateNFunc(1, List('a, 'b, 'a)) == List('a, 'b, 'a))
+    assert(duplicateNFunc(0, List('a, 'b, 'a)) == List())
+    assert(duplicateNFunc(5, List()) == List())
+  }
+
+  test("problem 15 - higher-order functions") {
+    assert(duplicateN(3, List('a, 'b, 'c, 'd, 'e)) == List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'd, 'd, 'd, 'e, 'e, 'e))
+    assert(duplicateN(2, List('a, 'a, 'a, 'a)) == List('a, 'a, 'a, 'a, 'a, 'a, 'a, 'a))
+    assert(duplicateN(2, List('a, 'b, 'a)) == List('a, 'a, 'b, 'b, 'a, 'a))
+    assert(duplicateN(1, List('a, 'b, 'a)) == List('a, 'b, 'a))
+    assert(duplicateN(0, List('a, 'b, 'a)) == List())
+    assert(duplicateN(5, List()) == List())
+  }
 }

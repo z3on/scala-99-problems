@@ -242,7 +242,7 @@ object ListProblems {
     list.flatMap(List.fill(n)(_))
 
   /**
-    * P15 (**) Duplicate the elements of a list a given number of times.
+    * P16 (**) Drop every Nth element from a list.
     * Recursive function
     */
   def dropFunc[T](n: Int, list: List[T]): List[T] = {
@@ -255,7 +255,7 @@ object ListProblems {
   }
 
   /**
-    * P15 (**) Duplicate the elements of a list a given number of times.
+    * P16 (**) Drop every Nth element from a list.
     * Higher-order functions
     */
   def drop[T](n: Int, list: List[T]): List[T] =
@@ -264,5 +264,28 @@ object ListProblems {
         case (_, index) => ((index + 1) % n) > 0
       }
       .map { case (el, _) => el }
+
+  /**
+    * P17 (**) Duplicate the elements of a list a given number of times.
+    * Recursive function
+    */
+  def splitFunc[T](n: Int, list: List[T]): (List[T], List[T]) = {
+    def nTimesList(rest: List[T], currentN: Int): (List[T], List[T]) =
+      if (rest.isEmpty) (Nil, Nil)
+      else nTimesList(rest.tail, currentN + 1) match {
+        case (before, after) =>
+          if (currentN < n) (rest.head :: before, after)
+          else (before, rest.head :: after)
+      }
+
+    nTimesList(list, 0)
+  }
+
+  /**
+    * P17 (**) Duplicate the elements of a list a given number of times.
+    * Higher-order functions
+    */
+  def split[T](n: Int, list: List[T]): (List[T], List[T]) =
+    list.splitAt(n)
 
 }

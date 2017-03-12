@@ -266,7 +266,7 @@ object ListProblems {
       .map { case (el, _) => el }
 
   /**
-    * P17 (**) Duplicate the elements of a list a given number of times.
+    * P17 (*) Split a list into two parts.
     * Recursive function
     */
   def splitFunc[T](n: Int, list: List[T]): (List[T], List[T]) = {
@@ -282,7 +282,7 @@ object ListProblems {
   }
 
   /**
-    * P17 (**) Duplicate the elements of a list a given number of times.
+    * P17 (*) Split a list into two parts.
     * Higher-order functions
     */
   def split[T](n: Int, list: List[T]): (List[T], List[T]) =
@@ -306,5 +306,13 @@ object ListProblems {
   def slice[T](from: Int, to: Int, list: List[T]): List[T] =
     // Obvious: list.slice(from, to)
     list.drop(from).take(to - from)
+
+  /**
+    * P19 (**) Rotate a list N places to the left.
+    * Higher-order functions
+    */
+  def rotate[T](n: Int, list: List[T]): List[T] =
+    if (n < 0) list.takeRight(-n) ++ list.dropRight(-n)
+    else list.drop(n) ++ list.take(n)
 
 }

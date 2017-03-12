@@ -225,4 +225,11 @@ class ProblemsTest extends FunSuite {
     assert(slice(5, 6, List('a, 'b, 'c, 'd)) == List())
     assert(slice(3, 4, List()) == List())
   }
+
+  test("problem 19 - higher-order functions") {
+    assert(rotate(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'a, 'b, 'c))
+    assert(rotate(-2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i))
+    assert(rotate(0, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
+    assert(rotate(3, List()) == List())
+  }
 }

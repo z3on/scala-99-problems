@@ -330,12 +330,12 @@ object ListProblems {
 
   /**
     * P20 (*) Remove the Kth element from a list.
-    * Recursive function
+    * Higher-order functions
     */
   def removeAt[T](n: Int, list: List[T]): (List[T], T) = {
     if (n < 0) throw new IndexOutOfBoundsException
     else list.splitAt(n) match {
-      case (_, Nil) => throw new NoSuchElementException
+      case (_, Nil) => throw new IndexOutOfBoundsException
       case (left, right) => (left ++ right.tail, right.head)
     }
   }
@@ -352,7 +352,7 @@ object ListProblems {
 
   /**
     * P21 (*) Insert an element at a given position into a list.
-    * Recursive function
+    * Higher-order functions
     */
   def insertAt[T](newElement: T, n: Int, list: List[T]): List[T] = {
     if (n < 0) throw new IndexOutOfBoundsException
@@ -362,5 +362,19 @@ object ListProblems {
         else left ++ (newElement :: right)
     }
   }
+
+  /**
+    * P22 (*) Create a list containing all integers within a given range.
+    * Recursive function
+    */
+  def rangeFunc(from: Int, to: Int): List[Int] =
+    if (from > to) Nil
+    else from :: range(from + 1, to)
+
+  /**
+    * P22 (*) Create a list containing all integers within a given range.
+    * Higher-order functions
+    */
+  def range(from: Int, to: Int): List[Int] = List.tabulate(to - from + 1)(_ + from)
 
 }

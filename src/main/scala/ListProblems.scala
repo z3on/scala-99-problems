@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException
 
 object ListProblems {
 
@@ -286,7 +287,7 @@ object ListProblems {
     * Higher-order functions
     */
   def split[T](n: Int, list: List[T]): (List[T], List[T]) =
-    // Obvious: list.splitAt(n)
+  // Obvious: list.splitAt(n)
     (list.take(n), list.drop(n))
 
   /**
@@ -304,7 +305,7 @@ object ListProblems {
     * Higher-order functions
     */
   def slice[T](from: Int, to: Int, list: List[T]): List[T] =
-    // Obvious: list.slice(from, to)
+  // Obvious: list.slice(from, to)
     list.drop(from).take(to - from)
 
   /**
@@ -314,5 +315,29 @@ object ListProblems {
   def rotate[T](n: Int, list: List[T]): List[T] =
     if (n < 0) list.takeRight(-n) ++ list.dropRight(-n)
     else list.drop(n) ++ list.take(n)
+
+  /**
+    * P20 (*) Remove the Kth element from a list.
+    * Recursive function
+    */
+  def removeAtFunc[T](n: Int, list: List[T]): (List[T], T) = {
+    if (list.isEmpty || n < 0) throw new NoSuchElementException
+    else if (n == 0) (list.tail, list.head)
+    else removeAtFunc(n - 1, list.tail) match {
+      case (rest, removed) => (list.head :: rest, removed)
+    }
+  }
+
+  /**
+    * P20 (*) Remove the Kth element from a list.
+    * Recursive function
+    */
+  def removeAt[T](n: Int, list: List[T]): (List[T], T) = {
+    if (n < 0) throw new NoSuchElementException
+    else list.splitAt(n) match {
+      case (_, Nil) => throw new NoSuchElementException
+      case (left, right) => (left ++ right.tail, right.head)
+    }
+  }
 
 }

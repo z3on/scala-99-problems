@@ -232,4 +232,28 @@ class ProblemsTest extends FunSuite {
     assert(rotate(0, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) == List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
     assert(rotate(3, List()) == List())
   }
+
+  test("problem 20 - recursive function") {
+    assert(removeAtFunc(1, List('a, 'b, 'c, 'd)) == (List('a, 'c, 'd), 'b))
+    assert(removeAtFunc(0, List('a, 'b, 'c, 'd)) == (List('b, 'c, 'd), 'a))
+    assert(removeAtFunc(3, List('a, 'b, 'c, 'd)) == (List('a, 'b, 'c), 'd))
+    assertThrows[NoSuchElementException] {
+      removeAtFunc(4, List('a, 'b, 'c, 'd))
+    }
+    assertThrows[NoSuchElementException] {
+      removeAtFunc(-1, List('a, 'b, 'c, 'd))
+    }
+  }
+
+  test("problem 20 - higher-order functions") {
+    assert(removeAt(1, List('a, 'b, 'c, 'd)) == (List('a, 'c, 'd), 'b))
+    assert(removeAt(0, List('a, 'b, 'c, 'd)) == (List('b, 'c, 'd), 'a))
+    assert(removeAt(3, List('a, 'b, 'c, 'd)) == (List('a, 'b, 'c), 'd))
+    assertThrows[NoSuchElementException] {
+      removeAt(4, List('a, 'b, 'c, 'd))
+    }
+    assertThrows[NoSuchElementException] {
+      removeAt(-1, List('a, 'b, 'c, 'd))
+    }
+  }
 }

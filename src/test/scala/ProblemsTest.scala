@@ -256,4 +256,28 @@ class ProblemsTest extends FunSuite {
       removeAt(-1, List('a, 'b, 'c, 'd))
     }
   }
+
+  test("problem 21 - recursive function") {
+    assert(insertAtFunc('x, 1, List('a, 'b, 'c, 'd)) == List('a, 'x, 'b, 'c, 'd))
+    assert(insertAtFunc('x, 0, List('a, 'b, 'c, 'd)) == List('x, 'a, 'b, 'c, 'd))
+    assert(insertAtFunc('x, 4, List('a, 'b, 'c, 'd)) == List('a, 'b, 'c, 'd, 'x))
+    assertThrows[IndexOutOfBoundsException] {
+      insertAtFunc('x, 5, List('a, 'b, 'c, 'd))
+    }
+    assertThrows[IndexOutOfBoundsException] {
+      insertAtFunc('x, -1, List('a, 'b, 'c, 'd))
+    }
+  }
+
+  test("problem 21 - higher-order functions") {
+    assert(insertAt('x, 1, List('a, 'b, 'c, 'd)) == List('a, 'x, 'b, 'c, 'd))
+    assert(insertAt('x, 0, List('a, 'b, 'c, 'd)) == List('x, 'a, 'b, 'c, 'd))
+    assert(insertAt('x, 4, List('a, 'b, 'c, 'd)) == List('a, 'b, 'c, 'd, 'x))
+    assertThrows[IndexOutOfBoundsException] {
+      insertAt('x, 5, List('a, 'b, 'c, 'd))
+    }
+    assertThrows[IndexOutOfBoundsException] {
+      insertAt('x, -1, List('a, 'b, 'c, 'd))
+    }
+  }
 }

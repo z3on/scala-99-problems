@@ -321,7 +321,7 @@ object ListProblems {
     * Recursive function
     */
   def removeAtFunc[T](n: Int, list: List[T]): (List[T], T) = {
-    if (list.isEmpty || n < 0) throw new NoSuchElementException
+    if (list.isEmpty || n < 0) throw new IndexOutOfBoundsException
     else if (n == 0) (list.tail, list.head)
     else removeAtFunc(n - 1, list.tail) match {
       case (rest, removed) => (list.head :: rest, removed)
@@ -333,10 +333,33 @@ object ListProblems {
     * Recursive function
     */
   def removeAt[T](n: Int, list: List[T]): (List[T], T) = {
-    if (n < 0) throw new NoSuchElementException
+    if (n < 0) throw new IndexOutOfBoundsException
     else list.splitAt(n) match {
       case (_, Nil) => throw new NoSuchElementException
       case (left, right) => (left ++ right.tail, right.head)
+    }
+  }
+
+  /**
+    * P21 (*) Insert an element at a given position into a list.
+    * Recursive function
+    */
+  def insertAtFunc[T](newElement: T, n: Int, list: List[T]): List[T] = {
+    if (n == 0) newElement :: list
+    else if (list.isEmpty || n < 0) throw new IndexOutOfBoundsException
+    else list.head :: insertAtFunc(newElement, n - 1, list.tail)
+  }
+
+  /**
+    * P21 (*) Insert an element at a given position into a list.
+    * Recursive function
+    */
+  def insertAt[T](newElement: T, n: Int, list: List[T]): List[T] = {
+    if (n < 0) throw new IndexOutOfBoundsException
+    else list.splitAt(n) match {
+      case (left, right) =>
+        if (left.length < n) throw new IndexOutOfBoundsException
+        else left ++ (newElement :: right)
     }
   }
 
